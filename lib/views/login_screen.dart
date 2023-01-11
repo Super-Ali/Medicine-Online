@@ -1,6 +1,7 @@
-
 import 'package:doctor_fyp/constant.dart/const.dart';
 import 'package:doctor_fyp/sizeConfig.dart';
+import 'package:doctor_fyp/views/Admin/Adminpanel.dart';
+import 'package:doctor_fyp/views/Catagoris%20Screens/choose.dart';
 import 'package:doctor_fyp/views/dashboard_screen.dart';
 import 'package:doctor_fyp/views/forgot_passwor.dart';
 import 'package:doctor_fyp/views/sign_up.dart';
@@ -13,73 +14,96 @@ class loginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: PADDING,
-              child: TextField(
-                        decoration: textfield_decoration("Username", Icons.email),
-                      ),
-                      
-            ),
-             Container(
-              padding: PADDING,
-              child: TextField(
-                        decoration: textfield_decoration("Password", Icons.lock),
-                      ),    
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+    String username = '';
+    String password = '';
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-               TextButton(
-                onPressed: (){
-                  Get.to(ForgotPassword());
-                }, child: Text('Forgot your password?'))
+                Image.asset("assets/cover.png"),
+                Container(
+                  padding: PADDING,
+                  child: TextField(
+                    decoration: textfield_decoration("Username", Icons.email),
+                    onChanged: (value) {
+                      username = value;
+                    },
+                  ),
+                ),
+                Container(
+                  padding: PADDING,
+                  child: TextField(
+                    decoration: textfield_decoration("Password", Icons.lock),
+                    onChanged: (value) {
+                      password = value;
+                    },
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Get.to(ForgotPassword());
+                        },
+                        child: const Text('Forgot your password?'))
+                  ],
+                ),
+                Container(
+                  width: 50 * (SizeConfig.widthMultiplier),
+                  margin: EdgeInsets.all(25),
+                  decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                  child: OutlinedButton(
+                      onPressed: () {
+                        if (username == adminUserName &&
+                            password == adminPassword) {
+                          Get.offAll(const AdminPanel());
+                        } else if (username == customerLogin &&
+                            password == adminPassword) {
+                          Get.offAll(const ChooseProfession());
+                        } else if (username == doctorLogin &&
+                            password == adminPassword) {
+                          Get.offAll(const ChooseProfession());
+                        } else
+                          Get.snackbar("", "Invalid username or password",
+                              backgroundColor: Colors.red,
+                              duration: Duration(seconds: 3));
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.white),
+                      )),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Get.to(const SignUp());
+                        },
+                        child: Text('Don\'t have an account? Signup'))
+                  ],
+                ),
+                // Container(
+                //   height: 1*(SizeConfig.heightMultiplier),
+                //   width: 10*(SizeConfig.heightMultiplier),
+                //   child: TextButton(
+                //     onPressed: (){},
+                //     child: Text('Login',style: TextStyle(color: Colors.black),)
+                //     ),
+                // )
               ],
             ),
-            Container(
-     width: 50*(SizeConfig.widthMultiplier),
-      margin: EdgeInsets.all(25), 
-      
-      decoration: BoxDecoration(
-       color:Colors.blue, 
-       borderRadius: BorderRadius.all(Radius.circular(12))
-      ),
-      child: OutlinedButton(
-       onPressed: () {
-         Get.to(DashBoard());
-       }, 
-        child: Text('Login',style: TextStyle(color: Colors.white),)),
-    ),
-    Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-               TextButton(
-                onPressed: (){
-                  Get.to(SignUp());
-                }, 
-                child: Text('Don\'t have an account? Signup'))
-              ],
-            ),
-            // Container(
-            //   height: 1*(SizeConfig.heightMultiplier),
-            //   width: 10*(SizeConfig.heightMultiplier),
-            //   child: TextButton(
-            //     onPressed: (){}, 
-            //     child: Text('Login',style: TextStyle(color: Colors.black),)
-            //     ),
-            // )
-
-          ],
+          ),
         ),
       ),
     );
   }
-
- 
 }
 
 // class ButtonClass extends StatelessWidget {
@@ -97,10 +121,10 @@ class loginScreen extends StatelessWidget {
 //   Widget build(BuildContext context) {
 //     return Container(
 //      width: 50*(SizeConfig.widthMultiplier),
-//       margin: EdgeInsets.all(25), 
-      
+//       margin: EdgeInsets.all(25),
+
 //       decoration: BoxDecoration(
-//        color:clr, 
+//        color:clr,
 //        borderRadius: BorderRadius.all(Radius.circular(12))
 //       ),
 //       child: OutlinedButton(

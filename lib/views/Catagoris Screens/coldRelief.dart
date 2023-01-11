@@ -1,7 +1,11 @@
+import 'package:doctor_fyp/constant.dart/ProductLists.dart';
+import 'package:doctor_fyp/constant.dart/const.dart';
+import 'package:doctor_fyp/views/Cart/Cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class ColdRelief extends StatelessWidget {
   const ColdRelief({super.key});
@@ -12,6 +16,20 @@ class ColdRelief extends StatelessWidget {
       //    backgroundColor: Color.fromARGB(255, 197, 225, 248),
       appBar: AppBar(
         title: Text("Cold Relief"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(Cart());
+              },
+              icon: Icon(Icons.shopping_cart)),
+          Container(
+              child: Center(
+                  child:
+                      Obx(() => Text(globalController.cartItems.toString())))),
+          SizedBox(
+            width: 20,
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -21,7 +39,7 @@ class ColdRelief extends StatelessWidget {
             children: [
               productTile(
                   "joshanda",
-                  "Hashmi Joshanda Sachet 1 'S",
+                  "hashmi joshanda",
                   "COMPANY : Hashmi\nTYPE : Sachet",
                   "Contains 12 efficacious herbs",
                   "Effective for all-seasons",
@@ -32,7 +50,7 @@ class ColdRelief extends StatelessWidget {
                   "12"),
               productTile(
                   "joharJoshanda",
-                  "Johar Joshanda Sugar Free Sachet 1 'S",
+                  "johar joshanda sugar free",
                   "COMPANY : Qarshi\nTYPE : Sachet",
                   "Contains 12 efficacious herbs",
                   "Effective for all-seasons",
@@ -43,7 +61,7 @@ class ColdRelief extends StatelessWidget {
                   "12"),
               productTile(
                   "surficol",
-                  "Surficol Plus Syrup 120 ml",
+                  "surficol plus",
                   "COMPANY : Qarshi\nTYPE : Syrup",
                   "Herbal and natural medicine",
                   "Effective against cough, cold, bronchitis and catarrh",
@@ -54,7 +72,7 @@ class ColdRelief extends StatelessWidget {
                   "12"),
               productTile(
                   "laooq",
-                  "Laooq Sapistan Powder 100 gm",
+                  "laooq sapistan powder",
                   "COMPANY : Hamdard\nTYPE : Powder",
                   "Provides relief from flu and cough",
                   "Alleviates the symptoms by decreasing mucus secretion and intensity of cough",
@@ -65,7 +83,7 @@ class ColdRelief extends StatelessWidget {
                   "8"),
               productTile(
                   "vix",
-                  "Vicks Balm 19 gm",
+                  "vicks balm",
                   "COMPANY : Procter & Gamble\nTYPE : Balm",
                   "Vaporising cold medicine",
                   "Provides effective relief from blocked nose, cough & cold like symptoms",
@@ -126,7 +144,15 @@ productTile(image, name, desc, point1, point2, point3, belowCart, price,
           height: 20,
         ),
         ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.showSnackbar(GetSnackBar(
+                message: "${name} Added to cart",
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+              ));
+              globalController.additem();
+              cartItems.add(name);
+            },
             style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(10)),
             child: Column(
               mainAxisSize: MainAxisSize.min,

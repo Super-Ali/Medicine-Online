@@ -1,9 +1,11 @@
+import 'package:doctor_fyp/Controllers/GlobalController.dart';
 import 'package:doctor_fyp/sizeConfig.dart';
 import 'package:doctor_fyp/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  Get.put(GlobalController());
   runApp(MyApp());
 }
 

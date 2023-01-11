@@ -20,7 +20,7 @@ class BabyMilk extends StatelessWidget {
                   children: [
                 productTile(
                     "bunyad",
-                    "Nestle Bunyad Powder 26 gm",
+                    "nestle bunyad",
                     "COMPANY : Nestle Nutrition\nTYPE : Powder",
                     "Boosts physical and mental growth",
                     "Fortified with Iron, Vitamin C & more",
@@ -31,7 +31,7 @@ class BabyMilk extends StatelessWidget {
                     "12"),
                 productTile(
                     "nido",
-                    "Nido +1 Shield Powder 150 gm",
+                    "nido shield",
                     "COMPANY : Nestle Nutrition\nTYPE : Powder",
                     "Boosts immunity and provides energy",
                     "With 2x more calcium for bone metabolism",
@@ -42,7 +42,7 @@ class BabyMilk extends StatelessWidget {
                     "12"),
                 productTile(
                     "lactogrow",
-                    "Lactogrow 3 DHA Powder 200 gm",
+                    "lactogrow",
                     "COMPANY : Nestle Nutrition\nTYPE : Powder",
                     "Vit A, C, Iron, Zinc & Selenium to support normal immune system function",
                     "Protein, Vit B1, Vit B2, Folic Acid, Vit B12, Vit A to support normal physical growth",
@@ -53,7 +53,7 @@ class BabyMilk extends StatelessWidget {
                     "12"),
                 productTile(
                     "lactogen",
-                    "Lactogen 1 DHA Powder 200 gm",
+                    "lactogen",
                     "COMPANY : Nestle Nutrition\nTYPE : Powder",
                     "Vit A, C, Iron, Zinc & Selenium to support normal immune system function",
                     "Protein, Vit B1, Vit B2, Folic Acid, Vit B12, Vit A to support normal physical growth",
@@ -64,7 +64,7 @@ class BabyMilk extends StatelessWidget {
                     "12"),
                 productTile(
                     "lactogen2",
-                    "Lactogen 2 DHA Powder 200 gm",
+                    "lactogen 2",
                     "COMPANY : Nestle Nutrition\nTYPE : Powder",
                     "Vit A, C, Iron, Zinc & Selenium to support normal immune system function",
                     "Protein, Vit B1, Vit B2, Folic Acid, Vit B12, Vit A to support normal physical growth",
