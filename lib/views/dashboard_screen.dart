@@ -47,6 +47,7 @@ class _DashBoardState extends State<DashBoard> {
       key: _scaffoldKey,
       drawer: new DrawerWidget(),
       appBar: AppBar(
+        title: Text(currentUser['name']),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -74,7 +75,7 @@ class _DashBoardState extends State<DashBoard> {
           Padding(
             padding: EdgeInsets.only(right: 8),
             child: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/doctor.png"),
+              child: Icon(Icons.person),
             ),
           )
         ],

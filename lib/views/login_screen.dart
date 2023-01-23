@@ -1,3 +1,5 @@
+import 'package:doctor_fyp/Database/Doctors.dart';
+import 'package:doctor_fyp/Database/Users.dart';
 import 'package:doctor_fyp/constant.dart/const.dart';
 import 'package:doctor_fyp/sizeConfig.dart';
 import 'package:doctor_fyp/views/Admin/Adminpanel.dart';
@@ -16,6 +18,7 @@ class loginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String username = '';
     String password = '';
+    bool error = false;
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -60,19 +63,59 @@ class loginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(12))),
                   child: OutlinedButton(
                       onPressed: () {
+                        for (int i = 0; i < UsersList.length; i++) {
+                          if (username == UsersList[i]['email'] &&
+                              password == UsersList[i]['password']) {
+                            currentUser = UsersList[i];
+                            Get.to(const ChooseProfession());
+                            error = false;
+                            isDoctor = false;
+                            isCustomer = true;
+                            break;
+                          } else {
+                            error = true;
+                          }
+                        }
+
+                        for (int i = 0; i < DoctorsList.length; i++) {
+                          if (username == DoctorsList[i]['email'] &&
+                              password == DoctorsList[i]['password']) {
+                            currentUser = DoctorsList[i];
+                            Get.to(const ChooseProfession());
+                            error = false;
+                            isDoctor = true;
+                            isCustomer = false;
+                            break;
+                          } else {
+                            error = true;
+                          }
+                        }
+
                         if (username == adminUserName &&
                             password == adminPassword) {
-                          Get.offAll(const AdminPanel());
-                        } else if (username == customerLogin &&
-                            password == adminPassword) {
-                          Get.offAll(const ChooseProfession());
-                        } else if (username == doctorLogin &&
-                            password == adminPassword) {
-                          Get.offAll(const ChooseProfession());
-                        } else
+                          Get.to(const AdminPanel());
+                          error = false;
+                        }
+
+                        if (error == true) {
                           Get.snackbar("", "Invalid username or password",
                               backgroundColor: Colors.red,
                               duration: Duration(seconds: 3));
+                        }
+
+                        // if (username == adminUserName &&
+                        //     password == adminPassword) {
+                        //   Get.offAll(const AdminPanel());
+                        // } else if (username == customerLogin &&
+                        //     password == adminPassword) {
+                        //   Get.offAll(const ChooseProfession());
+                        // } else if (username == doctorLogin &&
+                        //     password == adminPassword) {
+                        //   Get.offAll(const ChooseProfession());
+                        // } else
+                        //   Get.snackbar("", "Invalid username or password",
+                        //       backgroundColor: Colors.red,
+                        //       duration: Duration(seconds: 3));
                       },
                       child: const Text(
                         'Login',

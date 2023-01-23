@@ -1,16 +1,16 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:doctor_fyp/Database/Doctors.dart';
+import 'package:doctor_fyp/constant.dart/const.dart';
+import 'package:doctor_fyp/views/Doctor/Appointments.dart';
+import 'package:doctor_fyp/views/Doctor/MessageScreen.dart';
+import 'package:doctor_fyp/views/Doctor/Shcedule.dart';
+import 'package:doctor_fyp/views/Setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-import '../../constant.dart/const.dart';
 import '../../widgets/drawer.dart';
-import '../Cart/Cart.dart';
-import '../Message.dart';
-import '../Setting.dart';
-import '../dashboard_screen.dart';
-import '../doctorlist.dart';
 
 class DoctorScreen extends StatefulWidget {
   const DoctorScreen({super.key});
@@ -20,23 +20,29 @@ class DoctorScreen extends StatefulWidget {
 }
 
 class _DoctorScreenState extends State<DoctorScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  int _sIndex = 0;
+  late PageController _pController;
+  @override
+  void initState() {
+    _pController = PageController();
+    currentIndex = DoctorsList.indexOf(currentUser);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-    int _selectedIndex = 0;
-    PageController _pageController = PageController();
-
-    @override
-    void dispose() {
-      _pageController.dispose();
-      super.dispose();
-    }
-
     return Scaffold(
       key: _scaffoldKey,
-      drawer: new DrawerWidget(),
+      drawer: DrawerWidget(),
       appBar: AppBar(
+        title: Text(currentUser['name']),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -48,48 +54,49 @@ class _DoctorScreenState extends State<DoctorScreen> {
           },
           icon: Icon(Icons.menu),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 8),
-            child: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/doctor.png"),
+        actions: [
+          InkWell(
+            onTap: () {
+              print(currentUser);
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 8),
+              child: CircleAvatar(
+                backgroundImage: AssetImage("assets/images/doctor.png"),
+              ),
             ),
           )
         ],
       ),
       bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _selectedIndex,
+        selectedIndex: _sIndex,
         showElevation: true, // use this to remove appBar's elevation
         onItemSelected: (index) => setState(() {
-          _selectedIndex = index;
-          _pageController.animateToPage(index,
+          _sIndex = index;
+          _pController.animateToPage(index,
               duration: Duration(milliseconds: 300), curve: Curves.ease);
         }),
         items: [
           BottomNavyBarItem(
-              icon: Icon(Icons.people),
-              title: Text('Appointments'),
+              icon: Icon(Icons.menu_book),
+              title: Text('Shcedule'),
               activeColor: Colors.blue),
           BottomNavyBarItem(
-              icon: Icon(Icons.message),
+              icon: Icon(Icons.chat),
               title: Text('Messages'),
               activeColor: Colors.blue),
           BottomNavyBarItem(
               icon: Icon(Icons.settings),
               title: Text('Settings'),
-              activeColor: Colors.blue),
+              activeColor: Colors.blue)
         ],
       ),
       body: PageView(
-        controller: _pageController,
+        controller: _pController,
         onPageChanged: (index) {
-          setState(() => _selectedIndex = index);
+          setState(() => _sIndex = index);
         },
-        children: <Widget>[
-          ListDoct(),
-          Meassge(),
-          Setting(),
-        ],
+        children: <Widget>[Schedule(), MessageScreen(), Setting()],
       ),
     );
   }

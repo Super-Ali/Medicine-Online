@@ -126,6 +126,7 @@ TextStyle simplestyle1() {
 
 Column doctorList(String name, String title, String passion) {
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
         child: Text(
@@ -154,9 +155,14 @@ Column doctorList(String name, String title, String passion) {
 
 GlobalController globalController = GlobalController.instance;
 
-String adminUserName = "admin@dashboard.com";
-String adminPassword = "123456";
+String adminUserName = "admin";
+String adminPassword = "admin";
 String customerLogin = "customer@care.com";
 String customerPassword = "123456";
 String doctorLogin = "doctor@hospital.com";
 String doctorPassword = "123456";
+
+bool isDoctor = false;
+bool isCustomer = false;
+var currentUser;
+int currentIndex = 0;

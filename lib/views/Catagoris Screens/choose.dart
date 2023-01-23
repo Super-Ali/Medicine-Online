@@ -1,3 +1,4 @@
+import 'package:doctor_fyp/constant.dart/const.dart';
 import 'package:doctor_fyp/views/Doctor/DoctorScreen.dart';
 import 'package:doctor_fyp/views/dashboard_screen.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,13 @@ class ChooseProfession extends StatelessWidget {
                     height: 120,
                     child: FloatingActionButton.large(
                       onPressed: () {
-                        Get.off(DoctorScreen());
+                        if (isDoctor) {
+                          Get.to(DoctorScreen());
+                        } else {
+                          Get.snackbar("", "Sorry not a Doctor",
+                              backgroundColor: Colors.blue,
+                              duration: Duration(seconds: 3));
+                        }
                       },
                       child: const Icon(
                         Icons.medication,
@@ -45,7 +52,13 @@ class ChooseProfession extends StatelessWidget {
                     height: 120,
                     child: FloatingActionButton.large(
                       onPressed: () {
-                        Get.off(DashBoard());
+                        if (isCustomer) {
+                          Get.to(DashBoard());
+                        } else {
+                          Get.snackbar("", "Sorry not a Customer",
+                              backgroundColor: Colors.blue,
+                              duration: Duration(seconds: 3));
+                        }
                       },
                       child: const Icon(
                         Icons.person,
